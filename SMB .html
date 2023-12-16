@@ -1,0 +1,1165 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SMB</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="53e55e48-2885-467f-b3d1-c4dd01e557fe" class="page sans"><header><h1 class="page-title">SMB</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesDate"><path d="M3.29688 14.4561H12.7031C14.1797 14.4561 14.9453 13.6904 14.9453 12.2344V3.91504C14.9453 2.45215 14.1797 1.69336 12.7031 1.69336H3.29688C1.82031 1.69336 1.05469 2.45215 1.05469 3.91504V12.2344C1.05469 13.6973 1.82031 14.4561 3.29688 14.4561ZM3.27637 13.1162C2.70898 13.1162 2.39453 12.8154 2.39453 12.2207V5.9043C2.39453 5.30273 2.70898 5.00879 3.27637 5.00879H12.71C13.2842 5.00879 13.6055 5.30273 13.6055 5.9043V12.2207C13.6055 12.8154 13.2842 13.1162 12.71 13.1162H3.27637ZM6.68066 7.38086H7.08398C7.33008 7.38086 7.41211 7.30566 7.41211 7.05957V6.66309C7.41211 6.41699 7.33008 6.3418 7.08398 6.3418H6.68066C6.44141 6.3418 6.35938 6.41699 6.35938 6.66309V7.05957C6.35938 7.30566 6.44141 7.38086 6.68066 7.38086ZM8.92285 7.38086H9.31934C9.56543 7.38086 9.64746 7.30566 9.64746 7.05957V6.66309C9.64746 6.41699 9.56543 6.3418 9.31934 6.3418H8.92285C8.67676 6.3418 8.59473 6.41699 8.59473 6.66309V7.05957C8.59473 7.30566 8.67676 7.38086 8.92285 7.38086ZM11.1582 7.38086H11.5547C11.8008 7.38086 11.8828 7.30566 11.8828 7.05957V6.66309C11.8828 6.41699 11.8008 6.3418 11.5547 6.3418H11.1582C10.9121 6.3418 10.8301 6.41699 10.8301 6.66309V7.05957C10.8301 7.30566 10.9121 7.38086 11.1582 7.38086ZM4.44531 9.58203H4.84863C5.09473 9.58203 5.17676 9.50684 5.17676 9.26074V8.86426C5.17676 8.61816 5.09473 8.54297 4.84863 8.54297H4.44531C4.20605 8.54297 4.12402 8.61816 4.12402 8.86426V9.26074C4.12402 9.50684 4.20605 9.58203 4.44531 9.58203ZM6.68066 9.58203H7.08398C7.33008 9.58203 7.41211 9.50684 7.41211 9.26074V8.86426C7.41211 8.61816 7.33008 8.54297 7.08398 8.54297H6.68066C6.44141 8.54297 6.35938 8.61816 6.35938 8.86426V9.26074C6.35938 9.50684 6.44141 9.58203 6.68066 9.58203ZM8.92285 9.58203H9.31934C9.56543 9.58203 9.64746 9.50684 9.64746 9.26074V8.86426C9.64746 8.61816 9.56543 8.54297 9.31934 8.54297H8.92285C8.67676 8.54297 8.59473 8.61816 8.59473 8.86426V9.26074C8.59473 9.50684 8.67676 9.58203 8.92285 9.58203ZM11.1582 9.58203H11.5547C11.8008 9.58203 11.8828 9.50684 11.8828 9.26074V8.86426C11.8828 8.61816 11.8008 8.54297 11.5547 8.54297H11.1582C10.9121 8.54297 10.8301 8.61816 10.8301 8.86426V9.26074C10.8301 9.50684 10.9121 9.58203 11.1582 9.58203ZM4.44531 11.7832H4.84863C5.09473 11.7832 5.17676 11.708 5.17676 11.4619V11.0654C5.17676 10.8193 5.09473 10.7441 4.84863 10.7441H4.44531C4.20605 10.7441 4.12402 10.8193 4.12402 11.0654V11.4619C4.12402 11.708 4.20605 11.7832 4.44531 11.7832ZM6.68066 11.7832H7.08398C7.33008 11.7832 7.41211 11.708 7.41211 11.4619V11.0654C7.41211 10.8193 7.33008 10.7441 7.08398 10.7441H6.68066C6.44141 10.7441 6.35938 10.8193 6.35938 11.0654V11.4619C6.35938 11.708 6.44141 11.7832 6.68066 11.7832ZM8.92285 11.7832H9.31934C9.56543 11.7832 9.64746 11.708 9.64746 11.4619V11.0654C9.64746 10.8193 9.56543 10.7441 9.31934 10.7441H8.92285C8.67676 10.7441 8.59473 10.8193 8.59473 11.0654V11.4619C8.59473 11.708 8.67676 11.7832 8.92285 11.7832Z"></path></svg></span>Date</th><td><time>@December 11, 2023</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>Module Name</th><td>Footprinting</td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>Section Link</th><td><a href="https://academy.hackthebox.com/module/112/section/1067">https://academy.hackthebox.com/module/112/section/1067</a></td></tr></tbody></table></header><div class="page-body"><h2 id="7791c2d5-2899-4897-ad69-36e2d2fa359e" class="">What this section is about?</h2><p id="80b61d44-ee7f-49c3-8255-6f8ac93081ca" class="">
+</p><h2 id="7e063254-4978-4b20-9b0f-bb6051cb7aa8" class="">Keywords?</h2><p id="4d64da10-5311-4881-ae95-5a691eaf450a" class="">SMB = Server Message Block.</p><p id="019239a1-3047-4ec3-93db-c31e22895e9b" class="">ACL = Access Control Lists.</p><p id="b658f4c6-c558-4256-a706-22805b7a915d" class="">Samba = Alternative of <code>SMB</code> server.</p><p id="18ebb529-6ada-4874-be42-9e0219980858" class="">CIFS = Common Internet File System.</p><p id="a8419a9e-d4e1-4204-857c-8c88679aea1c" class="">SMBD = Sever Message Block Daemon.</p><p id="3dd541da-7f85-45a3-acb3-966581388386" class="">API = Application Programming Interface.</p><p id="7b4506bb-2b45-4378-adb4-fff87c66f196" class="">NetBIOS = Network Basic Input/Output System.</p><p id="eafee738-a2b4-44ae-8ef3-c3458668fed7" class="">NBNS = <code>NetBIOS</code> Name Server.</p><p id="30c306a6-27dc-49c1-9f6a-2f0cc3285a84" class="">WINS = Windows Internet Name Service.</p><h2 id="c54730f2-cc6d-4097-b1f9-2335a4744e64" class="">Learning Points:</h2><ol type="1" id="0ae2df1c-ad9d-4126-9cb9-234da5f84984" class="numbered-list" start="1"><li><code>SMB</code> is a client-server protocol that regulates access to files and entire directories and other network resources such as printers, routers, or interfaces released fort the network.</li></ol><ol type="1" id="28432525-650b-45eb-8924-9e58fd50d761" class="numbered-list" start="2"><li>Information exchange between different system processes can also be handled based on the <code>SMB</code> protocol.</li></ol><ol type="1" id="5574b50b-9619-4d7c-8e2d-d1cf19f66edd" class="numbered-list" start="3"><li><a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-smb/f210069c-7086-4dc2-885e-861d837df688">SMB</a> first became available to a broader public, for example, as part of the<br/> OS/2 network operating system LAN Manager and LAN Server.<br/></li></ol><ol type="1" id="82e37a90-448c-40f0-aba3-6c8a17219297" class="numbered-list" start="4"><li>The main application area of the protocol has been the Windows operating system series in particular, whose network services support <code>SMB</code> in a downward-compatible manner - which means that devices with newer editions can easily communicate with devices that have an older Microsoft operating system installed.</li></ol><ol type="1" id="64939b49-0004-47c6-8116-fd815d87facf" class="numbered-list" start="5"><li><code>SMB</code> also available in Linux.</li></ol><ol type="1" id="76e4e6ab-21bc-4592-8708-196904a762bf" class="numbered-list" start="6"><li>The <code>SMB</code> protocol enables the client to communicate with other participants in the same network to access files or services shared with it on the network.</li></ol><ol type="1" id="1a77ff76-e103-4a19-ae5f-dbbfe9d26733" class="numbered-list" start="7"><li>The other system must also have implemented the network protocol and received and processed the client request using an <code>SMB</code> server application.</li></ol><ol type="1" id="68ebdbbd-1e21-4ac5-962f-be3255f5d278" class="numbered-list" start="8"><li>In IP networks, <code>SMB</code> server can provide arbitrary parts of its local file system as shares.</li></ol><ol type="1" id="29faf633-22d1-408a-a07d-cbe73a852772" class="numbered-list" start="9"><li>Access rights are defined by <code>Access Control Lists(ACL)</code>. They can be controlled in a fine-grained manner based on attributes such as <code>execute, read,</code> and <code>full access</code> for individual users or user groups.</li></ol><ol type="1" id="4269c7ed-6489-46cc-84d2-e1fac233ed0f" class="numbered-list" start="10"><li>The <code>ACLs</code> are defined based on the shares and therefore do not correspond to the rights assigned locally on the server.</li></ol><ol type="1" id="c7d9e0a5-063f-4c36-995c-565b659982d6" class="numbered-list" start="11"><li>There is an alternative version of <code>SMB</code> server, called <code>Samba</code>, developed for Unix-based operating system.</li></ol><ol type="1" id="3a88b566-b785-4d1a-b4b0-5c7b1416dcbd" class="numbered-list" start="12"><li>Samba implements the <code>Common Internet File System(CIFS)</code> network protocol.</li></ol><ol type="1" id="e276df70-95c9-48e4-84ac-b77929c6c445" class="numbered-list" start="13"><li><code>CIFS</code> is a “dialect” of <code>SMB.</code></li></ol><ol type="1" id="4b6f0fc3-ebfc-4c93-b4e4-57510958e9ca" class="numbered-list" start="14"><li><code>CIFS</code> is a very specific implementation of the <code>SMB</code> protocol, which in turn was created by Microsoft.</li></ol><ol type="1" id="ac65369f-b7a9-4c1e-8b52-d7d21469b0b9" class="numbered-list" start="15"><li>This allows Samba to communicate with newer Windows systems. Therefore, it usually is referred to as <code>SMB / CIFS</code>.</li></ol><ol type="1" id="6347f562-7557-4383-b890-143c79ea28d6" class="numbered-list" start="16"><li><code>CIFS</code> is the extension of the <code>SMB</code> protocol.</li></ol><ol type="1" id="09505522-39b0-4fa7-ac15-000d9ebd6b1a" class="numbered-list" start="17"><li>When we pass <code>SMB</code> commands over <code>Samba</code> to an older <code>NetBIOS</code> service, it usually connects to the <code>Samba</code> server over TCP ports <code>137</code>, <code>138</code>, <code>139</code>, but <code>CIFS</code> uses TCP port <code>445</code> only. There are several versions of <code>SMB</code>, including outdated versions that are still used in specific infrastructures.</li></ol><table id="5549d948-e3a4-493e-a9b5-85d045c2b523" class="simple-table"><tbody><tr id="48322e02-7223-4a92-b8db-46231073b3f8"><td id="`MD}" class=""><strong>SMB Version</strong></td><td id="I?;_" class=""><strong>Supported</strong></td><td id="BMS}" class="" style="width:407px"><strong>Features</strong></td></tr><tr id="66a17dc9-cfaf-4ff2-9d4f-cd9490702c17"><td id="`MD}" class="">CIFS</td><td id="I?;_" class="">Windows NT 4.0</td><td id="BMS}" class="" style="width:407px">Communication via NetBIOS interface</td></tr><tr id="76977b25-e817-470e-9cd5-2fdad5701dab"><td id="`MD}" class="">SMB 1.0</td><td id="I?;_" class="">Windows 2000</td><td id="BMS}" class="" style="width:407px">Direct connection via TCP</td></tr><tr id="accf29ad-172d-49e6-91cb-dc77e751f83e"><td id="`MD}" class="">SMB 2.0</td><td id="I?;_" class="">Windows Vista, Windows Server 2008</td><td id="BMS}" class="" style="width:407px">Performance upgrades, improved message signing, caching feature</td></tr><tr id="e6663961-2e01-4751-aa04-0305b9b7e711"><td id="`MD}" class="">SMB 2.1</td><td id="I?;_" class="">Windows 7, Windows Server 2008 R2</td><td id="BMS}" class="" style="width:407px">Locking mechanisms</td></tr><tr id="cb139c66-69a8-4a4f-b498-6d7d43b58039"><td id="`MD}" class="">SMB 3.0</td><td id="I?;_" class="">Windows 8, Windows Server 2012</td><td id="BMS}" class="" style="width:407px">Multichannel connections, end-to-end encryption, remote storage access</td></tr><tr id="4596b0c7-6cbc-42bb-8ac9-e303233a1b99"><td id="`MD}" class="">SMB 3.0.2</td><td id="I?;_" class="">Windows 8.1, Windows Server 2012 R2</td><td id="BMS}" class="" style="width:407px"></td></tr><tr id="583588e9-f803-41de-a867-ce25a517694e"><td id="`MD}" class="">SMB 3.1.1</td><td id="I?;_" class="">Windows 10, Windows Server 2016</td><td id="BMS}" class="" style="width:407px">Integrity checking, AES-128 encryption</td></tr></tbody></table><ol type="1" id="6d1f19cc-f062-4109-b270-e403ff6c7689" class="numbered-list" start="18"><li>The server daemon (<code>smbd</code>) belonging to <code>Samba</code> provides the first two functionalities, while the <code>NetBIOS message block daemon (nmdb)</code> implements the last two functionalities. The <code>SMB</code> service control these two background programs.</li></ol><ol type="1" id="bd7455ef-9867-4c32-8ca6-e8d290c54766" class="numbered-list" start="19"><li>In a network, each host participates in the same <code>workgroup</code>. A workgroup is a group name that identifies an arbitrary collection of computers and their resources on an <code>SMB</code> network.</li></ol><ol type="1" id="3f58b976-e6ba-4cae-ac39-5170dae72288" class="numbered-list" start="20"><li>There can be multiple workgroups on the network at any given time. <code>IBM</code> developed an <code>application programming interface(API)</code> for networking computers called the <code>Network Basic Input/Output System(NetBIOS) </code></li></ol><ol type="1" id="fcb25d08-c356-4001-9202-ea369a72f3fc" class="numbered-list" start="21"><li>The <code>NetBIOS</code> API provided a blueprint for an application to connect and share date with other computers.</li></ol><ol type="1" id="6fa296c0-ff41-4ffe-973d-4e9eaa7425ca" class="numbered-list" start="22"><li>In a <code>NetBIOS</code>environment, when a machine goes online, it needs an name, which is done through the so-called name registration procedure. Either each host reserves its hostname on the network, or the <code>NetBIOS Name Server (NBNS)</code>is used for this purpose. It also has been enhanced to <code>Windows Internet Name Service (WINS)</code>.</li></ol><h3 id="7bc9319d-6d40-41ef-9b92-5f96051768b7" class="">Default Configuration</h3><p id="4fcbce9a-f88c-49c2-90d6-01faf002ad91" class="">Default Configuration</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a8734c94-2947-4d2c-81b3-cc8d56fd5f80" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ cat /etc/samba/smb.conf | grep -v &quot;#\|\;&quot; 
+[global]
+   workgroup = DEV.INFREIGHT.HTB
+   server string = DEVSMB
+   log file = /var/log/samba/log.%m
+   max log size = 1000
+   logging = file
+   panic action = /usr/share/samba/panic-action %d
+
+   server role = standalone server
+   obey pam restrictions = yes
+   unix password sync = yes
+
+   passwd program = /usr/bin/passwd %u
+   passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+
+   pam password change = yes
+   map to guest = bad user
+   usershare allow guests = yes
+
+[printers]
+   comment = All Printers
+   browseable = no
+   path = /var/spool/samba
+   printable = yes
+   guest ok = no
+   read only = yes
+   create mask = 0700
+
+[print$]   comment = Printer Drivers
+   path = /var/lib/samba/printers
+   browseable = yes
+   read only = yes
+   guest ok = no
+</code></pre><table id="5a58ca8c-1981-4669-ac01-65cf06137a00" class="simple-table"><tbody><tr id="04cbe1a9-af53-4406-9a74-171e410b0c6e"><td id="K\iQ" class=""><strong>Setting</strong></td><td id="g~dg" class="" style="width:527px"><strong>Description</strong></td></tr><tr id="f11579e6-d435-4294-b6ab-c253cdc7f6bb"><td id="K\iQ" class=""><code>[sharename]</code></td><td id="g~dg" class="" style="width:527px">The name of the network share.</td></tr><tr id="a8102853-41a7-4efc-9b57-d61a1b9883c3"><td id="K\iQ" class=""><code>workgroup = WORKGROUP/DOMAIN</code></td><td id="g~dg" class="" style="width:527px">Workgroup that will appear when clients query.</td></tr><tr id="86626d36-1fa3-4a4c-8830-23cfed634eba"><td id="K\iQ" class=""><code>path = /path/here/</code></td><td id="g~dg" class="" style="width:527px">The directory to which user is to be given access.</td></tr><tr id="4cb13aca-c14e-4c25-b369-b88e6b17c85d"><td id="K\iQ" class=""><code>server string = STRING</code></td><td id="g~dg" class="" style="width:527px">The string that will show up when a connection is initiated.</td></tr><tr id="ee8d3003-5241-4411-a02c-1d6860052b2d"><td id="K\iQ" class=""><code>unix password sync = yes</code></td><td id="g~dg" class="" style="width:527px">Synchronize the UNIX password with the SMB password?</td></tr><tr id="9abec85a-7c82-44e2-8c2d-dd19eeee934e"><td id="K\iQ" class=""><code>usershare allow guests = yes</code></td><td id="g~dg" class="" style="width:527px">Allow non-authenticated users to access defined share?</td></tr><tr id="057691be-d283-4af4-b9be-7d2811a46666"><td id="K\iQ" class=""><code>map to guest = bad user</code></td><td id="g~dg" class="" style="width:527px">What to do when a user login request doesn&#x27;t match a valid UNIX user?</td></tr><tr id="e93187f9-78fb-4d58-87a4-c44b11073071"><td id="K\iQ" class=""><code>browseable = yes</code></td><td id="g~dg" class="" style="width:527px">Should this share be shown in the list of available shares?</td></tr><tr id="24b21c09-5fed-41d6-a94d-4026f4b6c64a"><td id="K\iQ" class=""><code>guest ok = yes</code></td><td id="g~dg" class="" style="width:527px">Allow connecting to the service without using a password?</td></tr><tr id="4e51abe3-6160-45fd-80f5-338d42f441a9"><td id="K\iQ" class=""><code>read only = yes</code></td><td id="g~dg" class="" style="width:527px">Allow users to read files only?</td></tr><tr id="7adb994d-2702-40b8-b196-ac57d59c7fd6"><td id="K\iQ" class=""><code>create mask = 0700</code></td><td id="g~dg" class="" style="width:527px">What permissions need to be set for newly created files?</td></tr></tbody></table><h2 id="d6f4d681-30eb-4fae-a965-f82535a6c3c6" class="">Dangerous Settings</h2><table id="50710cde-c5dc-4aa5-8bdf-d561055067d0" class="simple-table"><tbody><tr id="084746a0-3f35-4afa-a196-73c032e06256"><td id="hd]D" class=""><strong>Setting</strong></td><td id="}|Ir" class="" style="width:480px"><strong>Description</strong></td></tr><tr id="5e83c916-811b-404f-8d01-88bcacb3b221"><td id="hd]D" class=""><code>browseable = yes</code></td><td id="}|Ir" class="" style="width:480px">Allow listing available shares in the current share?</td></tr><tr id="6a91b517-0e5a-43ea-ac90-111e31bf0fd5"><td id="hd]D" class=""><code>read only = no</code></td><td id="}|Ir" class="" style="width:480px">Forbid the creation and modification of files?</td></tr><tr id="5a6f21ca-b7e6-4d2b-9f03-f6168ef326ed"><td id="hd]D" class=""><code>writable = yes</code></td><td id="}|Ir" class="" style="width:480px">Allow users to create and modify files?</td></tr><tr id="ba593dd7-92c0-46db-8fde-8a8b38a56ce4"><td id="hd]D" class=""><code>guest ok = yes</code></td><td id="}|Ir" class="" style="width:480px">Allow connecting to the service without using a password?</td></tr><tr id="ab2b2c79-2b4f-4e93-ba21-f98a258ed371"><td id="hd]D" class=""><code>enable privileges = yes</code></td><td id="}|Ir" class="" style="width:480px">Honor privileges assigned to specific SID?</td></tr><tr id="f61b7daf-efd0-4a92-ae9f-ab916e379f68"><td id="hd]D" class=""><code>create mask = 0777</code></td><td id="}|Ir" class="" style="width:480px">What permissions must be assigned to the newly created files?</td></tr><tr id="c56b0ed9-157c-411f-9479-d33df4a88c72"><td id="hd]D" class=""><code>directory mask = 0777</code></td><td id="}|Ir" class="" style="width:480px">What permissions must be assigned to the newly created directories?</td></tr><tr id="8833e288-e4b2-4306-bcec-d0c92b50e0fe"><td id="hd]D" class=""><code>logon script = script.sh</code></td><td id="}|Ir" class="" style="width:480px">What script needs to be executed on the user&#x27;s login?</td></tr><tr id="0b7fef75-121a-4d4b-b6f2-f7b035cf18b3"><td id="hd]D" class=""><code>magic script = script.sh</code></td><td id="}|Ir" class="" style="width:480px">Which script should be executed when the script gets closed?</td></tr><tr id="0573c69a-ba5f-4a5b-86f8-96aa70dbcd0b"><td id="hd]D" class=""><code>magic output = script.out</code></td><td id="}|Ir" class="" style="width:480px">Where the output of the magic script needs to be stored?</td></tr></tbody></table><h3 id="722be3eb-4db2-473e-be3a-455851bd0791" class="">Restart Samba</h3><p id="e37e54c8-9b9f-4454-957a-44c40e91fcf5" class="">Restart Samba</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7ecc83d6-5d65-4502-a0bb-8ff25db05551" class="code code-wrap"><code class="language-Plain Text">root@samba:~# sudo systemctl restart smbd</code></pre><ol type="1" id="e2edb911-49d3-4cbe-b67d-0c47b8273fed" class="numbered-list" start="23"><li>we can display a list (<code>-L</code>) of the server&#x27;s shares with the <code>smbclient</code> command from our host. We use the so-called <code>null session</code> (<code>-N</code>), which is <code>anonymous</code> access without the input of existing users or valid passwords.</li></ol><p id="107401f2-fedb-4352-afeb-410bc0b73836" class="">MBclient - Connecting to the Share</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="32bfaa5a-2d73-4698-87e0-14a858e3932d" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ smbclient //10.129.14.128/notes
+Enter WORKGROUP\&lt;username&gt;&#x27;s password:
+Anonymous login successful
+Try &quot;help&quot; to get a list of possible commands.
+
+
+smb: \&gt; help
+
+?              allinfo        altname        archive        backup
+blocksize      cancel         case_sensitive cd             chmod
+chown          close          del            deltree        dir
+du             echo           exit           get            getfacl
+geteas         hardlink       help           history        iosize
+lcd            link           lock           lowercase      ls
+l              mask           md             mget           mkdir
+more           mput           newer          notify         open
+posix          posix_encrypt  posix_open     posix_mkdir    posix_rmdir
+posix_unlink   posix_whoami   print          prompt         put
+pwd            q              queue          quit           readlink
+rd             recurse        reget          rename         reput
+rm             rmdir          showacls       setea          setmode
+scopy          stat           symlink        tar            tarmode
+timeout        translate      unlock         volume         vuid
+wdel           logon          listconnect    showconnect    tcon
+tdis           tid            utimes         logoff         ..
+!
+
+
+smb: \&gt; ls
+
+  .                                   D        0  Wed Sep 22 18:17:51 2021
+  ..                                  D        0  Wed Sep 22 12:03:59 2021
+  prep-prod.txt                       N       71  Sun Sep 19 15:45:21 2021
+
+                30313412 blocks of size 1024. 16480084 blocks available
+</code></pre><ol type="1" id="d2096717-223a-4ac2-870e-2ac3bc4190fb" class="numbered-list" start="24"><li>Once we have discovered interesting files or folders, we can download them using the <code>get</code> command. </li></ol><ol type="1" id="452d7132-5a81-49e6-be19-d4b6d3ad56fe" class="numbered-list" start="25"><li>Smbclient also allows us to execute local system commands using an exclamation mark at the beginning (<code>!&lt;cmd&gt;</code>) without interrupting the connection.</li></ol><p id="7c3ce720-d433-47cf-aeae-34190d532eac" class="">Download Files from SMB</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="032401e6-02a1-4f27-8398-e9cdfc5c9b36" class="code code-wrap"><code class="language-Plain Text">smb: \&gt; get prep-prod.txt
+
+getting file \prep-prod.txt of size 71 as prep-prod.txt (8,7 KiloBytes/sec)
+(average 8,7 KiloBytes/sec)
+
+
+smb: \&gt; !ls
+
+prep-prod.txt
+
+
+smb: \&gt; !cat prep-prod.txt
+
+[] check your code with the templates
+[] run code-assessment.py
+[] …
+</code></pre><ol type="1" id="d437f760-7a18-493c-9c9a-a36f72a81c5b" class="numbered-list" start="26"><li>From the administrative point of view, we can check these connections using <code>smbstatus</code>. Apart from the Samba version, we can also see who, from which host, and which share the client is connected. This is especially important once we have entered a subnet (perhaps even an isolated one) that the others can still access.</li></ol><ol type="1" id="529bf51e-1ef2-41a1-a70c-674dbc7470a6" class="numbered-list" start="27"><li>For example, with domain-level security, the samba server acts as a <br/>member of a Windows domain. Each domain has at least one domain <br/>controller, usually a Windows NT server providing password <br/>authentication. <br/></li></ol><ol type="1" id="0c8c5014-81a4-4d50-8322-933073fbc2ea" class="numbered-list" start="28"><li>This domain controller provides the workgroup with a <br/>definitive password server. The domain controllers keep track of users <br/>and passwords in their own <br/><code>Security Authentication Module</code> (<code>SAM</code>) and authenticate each user when they log in for the first time and wish to access another machine&#x27;s share.</li></ol><p id="cdee31a4-9316-4c8b-a504-d4aec90477c3" class="">Samba Status</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="522a7758-80fc-4e39-8ed4-0ca3d1f8373c" class="code code-wrap"><code class="language-Plain Text">root@samba:~# smbstatus
+Samba version 4.11.6-Ubuntu
+PID     Username     Group        Machine                                   Protocol Version  Encryption           Signing
+----------------------------------------------------------------------------------------------------------------------------------------
+75691   sambauser    samba        10.10.14.4 (ipv4:10.10.14.4:45564)      SMB3_11           -                    -
+
+Service      pid     Machine       Connected at                     Encryption   Signing
+---------------------------------------------------------------------------------------------
+notes        75691   10.10.14.4   Do Sep 23 00:12:06 2021 CEST     -            -
+
+No locked files
+</code></pre><p id="4078731b-f042-4852-8efb-1a46ac0abe87" class="">Nmap</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8207415f-ec9d-4948-a2e9-b247422e3cae" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ sudo nmap 10.129.14.128 -sV -sC -p139,445Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 15:15 CEST
+Nmap scan report for sharing.inlanefreight.htb (10.129.14.128)
+Host is up (0.00024s latency).
+
+PORT    STATE SERVICE     VERSION
+139/tcp open  netbios-ssn Samba smbd 4.6.2
+445/tcp open  netbios-ssn Samba smbd 4.6.2
+MAC Address: 00:00:00:00:00:00 (VMware)
+
+Host script results:
+|_nbstat: NetBIOS name: HTB, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: &lt;unknown&gt; (unknown)
+| smb2-security-mode:
+|   2.02:
+|_    Message signing enabled but not required
+| smb2-time:
+|   date: 2021-09-19T13:16:04
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.35 seconds
+</code></pre><p id="5033f1f7-6bf6-46c4-831b-31d81b4a2840" class=""><em><strong>[ We can see from the results that it is not very much that Nmap provided <br/>us with here. Therefore, we should resort to other tools that allow us <br/>to interact manually with the SMB and send specific requests for the <br/>information. One of the handy tools for this is <br/></strong></em><em><strong><code>rpcclient</code></strong></em><em><strong>. This is a tool to perform MS-RPC functions. ]</strong></em></p><ol type="1" id="f91307ea-4b44-4924-b1b6-78d983eea037" class="numbered-list" start="29"><li>The <a href="https://www.geeksforgeeks.org/remote-procedure-call-rpc-in-operating-system/">Remote Procedure Call</a> (<code>RPC</code>) is a concept and, therefore, also a central tool to realize operational and work-sharing structures in networks and client-server architectures. The communication process via <code>RPC</code> includes passing parameters and the return of a function value.</li></ol><p id="1d4162d5-1542-4fde-b5ff-ea49b3114213" class="">RPCclient</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="708ec88c-d053-45d2-a523-692db23c4a33" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ rpcclient -U &quot;&quot; 10.129.14.128
+Enter WORKGROUP\&#x27;s password:
+rpcclient $&gt;</code></pre><table id="c01d9de5-39f9-436a-a779-740f9542724b" class="simple-table"><tbody><tr id="4069a078-0f00-4343-89cb-b7df5c13d64d"><td id="HgP:" class=""><strong>Query</strong></td><td id="IEy}" class="" style="width:591px"><strong>Description</strong></td></tr><tr id="b581a806-5279-4291-a3ac-952876068210"><td id="HgP:" class=""><code>srvinfo</code></td><td id="IEy}" class="" style="width:591px">Server information.</td></tr><tr id="0746829c-27bd-4287-8041-c896056c34a8"><td id="HgP:" class=""><code>enumdomains</code></td><td id="IEy}" class="" style="width:591px">Enumerate all domains that are deployed in the network.</td></tr><tr id="c7cb142b-7453-4299-8d3f-ffda74ae255d"><td id="HgP:" class=""><code>querydominfo</code></td><td id="IEy}" class="" style="width:591px">Provides domain, server, and user information of deployed domains.</td></tr><tr id="a1313dff-fff1-4998-832a-b5727070564f"><td id="HgP:" class=""><code>netshareenumall</code></td><td id="IEy}" class="" style="width:591px">Enumerates all available shares.</td></tr><tr id="d27dfd2a-7c07-4bd3-8ed3-62993c7562dc"><td id="HgP:" class=""><code>netsharegetinfo &lt;share&gt;</code></td><td id="IEy}" class="" style="width:591px">Provides information about a specific share.</td></tr><tr id="48d5e9c8-8186-4389-9caa-e4731f6b0791"><td id="HgP:" class=""><code>enumdomusers</code></td><td id="IEy}" class="" style="width:591px">Enumerates all domain users.</td></tr><tr id="d94169c9-28df-4fec-840b-c84901fa0893"><td id="HgP:" class=""><code>queryuser &lt;RID&gt;</code></td><td id="IEy}" class="" style="width:591px">Provides information about a specific user.</td></tr></tbody></table><p id="952ce631-89c3-4afc-b56a-66acab72e893" class="">RPCclient - Enumeration</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ef2f3972-7830-452c-b95a-1df67169518f" class="code code-wrap"><code class="language-Plain Text">rpcclient $&gt; srvinfo
+        DEVSMB         Wk Sv PrQ Unx NT SNT DEVSM
+        platform_id     :       500
+        os version      :       6.1
+        server type     :       0x809a03
+
+
+rpcclient $&gt; enumdomainsname:[DEVSMB] idx:[0x0]
+name:[Builtin] idx:[0x1]
+
+
+rpcclient $&gt; querydominfoDomain:         DEVOPS
+Server:         DEVSMB
+Comment:        DEVSM
+Total Users:    2
+Total Groups:   0
+Total Aliases:  0
+Sequence No:    1632361158
+Force Logoff:   -1
+Domain Server State:    0x1
+Server Role:    ROLE_DOMAIN_PDC
+Unknown 3:      0x1
+
+
+rpcclient $&gt; netshareenumallnetname: print$
+        remark: Printer Drivers
+        path:   C:\var\lib\samba\printers
+        password:
+netname: home
+        remark: INFREIGHT Samba
+        path:   C:\home\
+        password:
+netname: dev
+        remark: DEVenv
+        path:   C:\home\sambauser\dev\
+        password:
+netname: notes
+        remark: CheckIT
+        path:   C:\mnt\notes\
+        password:
+netname: IPC$
+        remark: IPC Service (DEVSM)
+        path:   C:\tmp
+        password:
+
+
+rpcclient $&gt; netsharegetinfo notesnetname: notes
+        remark: CheckIT
+        path:   C:\mnt\notes\
+        password:
+        type:   0x0
+        perms:  0
+        max_uses:       -1
+        num_uses:       1
+revision: 1
+type: 0x8004: SEC_DESC_DACL_PRESENT SEC_DESC_SELF_RELATIVE
+DACL
+        ACL     Num ACEs:       1       revision:       2
+        ---
+        ACE
+                type: ACCESS ALLOWED (0) flags: 0x00
+                Specific bits: 0x1ff
+                Permissions: 0x101f01ff: Generic all access SYNCHRONIZE_ACCESS WRITE_OWNER_ACCESS WRITE_DAC_ACCESS READ_CONTROL_ACCESS DELETE_ACCESS
+                SID: S-1-1-0
+</code></pre><p id="0233ed60-c69c-49d7-afcb-753a2f545c57" class=""><em><strong>[These examples show us what information can be leaked to anonymous users. Once an </strong></em><em><strong><code>anonymous</code></strong></em><em><strong>user has access to a network service, it only takes one mistake to give them too many permissions or too much visibility to put the entire network at significant risk.]</strong></em></p><p id="fe1c045c-8332-45cb-8bcc-b952fb2fae91" class="">Rpcclient - User Enumeration</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="39a4f4a9-cfc7-40bc-940f-03d332d75c30" class="code code-wrap"><code class="language-Plain Text">rpcclient $&gt; enumdomusers
+user:[mrb3n] rid:[0x3e8]
+user:[cry0l1t3] rid:[0x3e9]
+
+
+rpcclient $&gt; queryuser 0x3e9        User Name   :   cry0l1t3
+        Full Name   :   cry0l1t3
+        Home Drive  :   \\devsmb\cry0l1t3
+        Dir Drive   :
+        Profile Path:   \\devsmb\cry0l1t3\profile
+        Logon Script:
+        Description :
+        Workstations:
+        Comment     :
+        Remote Dial :
+        Logon Time               :      Do, 01 Jan 1970 01:00:00 CET
+        Logoff Time              :      Mi, 06 Feb 2036 16:06:39 CET
+        Kickoff Time             :      Mi, 06 Feb 2036 16:06:39 CET
+        Password last set Time   :      Mi, 22 Sep 2021 17:50:56 CEST
+        Password can change Time :      Mi, 22 Sep 2021 17:50:56 CEST
+        Password must change Time:      Do, 14 Sep 30828 04:48:05 CEST
+        unknown_2[0..31]...
+        user_rid :      0x3e9
+        group_rid:      0x201
+        acb_info :      0x00000014
+        fields_present: 0x00ffffff
+        logon_divs:     168
+        bad_password_count:     0x00000000
+        logon_count:    0x00000000
+        padding1[0..7]...
+        logon_hrs[0..21]...
+
+
+rpcclient $&gt; queryuser 0x3e8        User Name   :   mrb3n
+        Full Name   :
+        Home Drive  :   \\devsmb\mrb3n
+        Dir Drive   :
+        Profile Path:   \\devsmb\mrb3n\profile
+        Logon Script:
+        Description :
+        Workstations:
+        Comment     :
+        Remote Dial :
+        Logon Time               :      Do, 01 Jan 1970 01:00:00 CET
+        Logoff Time              :      Mi, 06 Feb 2036 16:06:39 CET
+        Kickoff Time             :      Mi, 06 Feb 2036 16:06:39 CET
+        Password last set Time   :      Mi, 22 Sep 2021 17:47:59 CEST
+        Password can change Time :      Mi, 22 Sep 2021 17:47:59 CEST
+        Password must change Time:      Do, 14 Sep 30828 04:48:05 CEST
+        unknown_2[0..31]...
+        user_rid :      0x3e8
+        group_rid:      0x201
+        acb_info :      0x00000010
+        fields_present: 0x00ffffff
+        logon_divs:     168
+        bad_password_count:     0x00000000
+        logon_count:    0x00000000
+        padding1[0..7]...
+        logon_hrs[0..21]...
+</code></pre><p id="882855ce-f545-454e-973e-343702fcaf1f" class="">Rpcclient - Group Information</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1680970d-8953-4525-9cc5-fcd9454ce234" class="code code-wrap"><code class="language-Plain Text">rpcclient $&gt; querygroup 0x201
+        Group Name:     None
+        Description:    Ordinary Users
+        Group Attribute:7
+        Num Members:2
+</code></pre><p id="ae36585e-5483-4317-8191-c9389c245a70" class=""><em><strong>[However, it can also happen that not all commands are available to us, <br/>and we have certain restrictions based on the user. However, the query <br/></strong></em><em><strong><code>queryuser &lt;RID&gt;</code></strong></em><em><strong><br/> is mostly allowed based on the RID. So we can use the rpcclient to <br/>brute force the RIDs to get information. Because we may not know who has<br/> been assigned which RID, we know that we will get information about it <br/>as soon as we query an assigned RID. There are several ways and tools we<br/> can use for this. To stay with the tool, we can create a <br/></strong></em><em><strong><code>For-loop</code></strong></em><em><strong> using </strong></em><em><strong><code>Bash</code></strong></em><em><strong> where we send a command to the service using </strong></em><code><em><strong>rpcclient</strong></em></code><em><strong> and filter out the results.]</strong></em></p><p id="da068c2e-f686-4822-9052-36f22b62cf88" class="">Brute Forcing User RIDs</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="84b403ea-823b-4a60-b288-b9dcedd7bf87" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ for i in $(seq 500 1100);do rpcclient -N -U &quot;&quot; 10.129.14.128 -c &quot;queryuser 0x$(printf &#x27;%x\n&#x27; $i)&quot; | grep &quot;User Name\|user_rid\|group_rid&quot; &amp;&amp; echo &quot;&quot;;done
+        User Name   :   sambauser
+        user_rid :      0x1f5
+        group_rid:      0x201
+
+        User Name   :   mrb3n
+        user_rid :      0x3e8
+        group_rid:      0x201
+
+        User Name   :   cry0l1t3
+        user_rid :      0x3e9
+        group_rid:      0x201
+</code></pre><ol type="1" id="8e770b4b-6e89-42d0-b12a-cfeb1e15b919" class="numbered-list" start="30"><li>An alternative to this would be a Python script from <a href="https://github.com/SecureAuthCorp/impacket">Impacket</a> called <a href="https://github.com/SecureAuthCorp/impacket/blob/master/examples/samrdump.py">samrdump.py</a>.</li></ol><p id="c3d23c16-b870-47ec-8473-ba251ed53497" class="">Impacket - Samrdump.py</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="862f746a-ac0a-4382-b868-de40ef2f842d" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ samrdump.py 10.129.14.128
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+
+[*] Retrieving endpoint list from 10.129.14.128
+Found domain(s):
+ . DEVSMB
+ . Builtin
+[*] Looking up users in domain DEVSMB
+Found user: mrb3n, uid = 1000
+Found user: cry0l1t3, uid = 1001
+mrb3n (1000)/FullName:
+mrb3n (1000)/UserComment:
+mrb3n (1000)/PrimaryGroupId: 513
+mrb3n (1000)/BadPasswordCount: 0
+mrb3n (1000)/LogonCount: 0
+mrb3n (1000)/PasswordLastSet: 2021-09-22 17:47:59
+mrb3n (1000)/PasswordDoesNotExpire: False
+mrb3n (1000)/AccountIsDisabled: False
+mrb3n (1000)/ScriptPath:
+cry0l1t3 (1001)/FullName: cry0l1t3
+cry0l1t3 (1001)/UserComment:
+cry0l1t3 (1001)/PrimaryGroupId: 513
+cry0l1t3 (1001)/BadPasswordCount: 0
+cry0l1t3 (1001)/LogonCount: 0
+cry0l1t3 (1001)/PasswordLastSet: 2021-09-22 17:50:56
+cry0l1t3 (1001)/PasswordDoesNotExpire: False
+cry0l1t3 (1001)/AccountIsDisabled: False
+cry0l1t3 (1001)/ScriptPath:
+[*] Received 2 entries.
+</code></pre><ol type="1" id="44361c09-6533-4cb5-b2d7-04403d9fa2ad" class="numbered-list" start="31"><li>The information we have already obtained with <code>rpcclient</code> can also be obtained using other tools. For example, the <a href="https://github.com/ShawnDEvans/smbmap">SMBMap</a> and <a href="https://github.com/byt3bl33d3r/CrackMapExec">CrackMapExec</a> tools are also widely used and helpful for the enumeration of SMB services.</li></ol><p id="32586e98-4bc3-4b06-aca7-aa3c7feb1abd" class="">SMBmap</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3440598a-267a-4288-8f5f-b981d20670ac" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ smbmap -H 10.129.14.128[+] Finding open SMB ports....
+[+] User SMB session established on 10.129.14.128...
+[+] IP: 10.129.14.128:445       Name: 10.129.14.128
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        print$                                                  NO ACCESS       Printer Drivers        home                                                    NO ACCESS       INFREIGHT Samba
+        dev                                                     NO ACCESS       DEVenv
+        notes                                                   NO ACCESS       CheckIT
+        IPC$                                                    NO ACCESS       IPC Service (DEVSM)</code></pre><p id="fa0f57a1-9ae7-4cc3-ab22-c3585cd4b0fc" class="">CrackMapExec</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19295cc8-64b1-4b10-9401-165cf7697480" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ crackmapexec smb 10.129.14.128 --shares -u &#x27;&#x27; -p &#x27;&#x27;SMB         10.129.14.128   445    DEVSMB           [*] Windows 6.1 Build 0 (name:DEVSMB) (domain:) (signing:False) (SMBv1:False)
+SMB         10.129.14.128   445    DEVSMB           [+] \:
+SMB         10.129.14.128   445    DEVSMB           [+] Enumerated shares
+SMB         10.129.14.128   445    DEVSMB           Share           Permissions     Remark
+SMB         10.129.14.128   445    DEVSMB           -----           -----------     ------
+SMB         10.129.14.128   445    DEVSMB           print$                          Printer DriversSMB         10.129.14.128   445    DEVSMB           home                            INFREIGHT Samba
+SMB         10.129.14.128   445    DEVSMB           dev                             DEVenv
+SMB         10.129.14.128   445    DEVSMB           notes           READ,WRITE      CheckIT
+SMB         10.129.14.128   445    DEVSMB           IPC$                            IPC Service (DEVSM)</code></pre><ol type="1" id="a7370cdf-7d74-426e-817a-e66511e8f0f8" class="numbered-list" start="32"><li>Another tool worth mentioning is the so-called <a href="https://github.com/cddmp/enum4linux-ng">enum4linux-ng</a>,<br/> which is based on an older tool, enum4linux. This tool automates many <br/>of the queries, but not all, and can return a large amount of <br/>information.<br/></li></ol><p id="d845de2b-5c21-4d8f-8144-5d4dcd2df93a" class="">Enum4Linux-ng - Installation</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1bbdbc97-c0c6-45f7-9792-2f181efc7f29" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ git clone https://github.com/cddmp/enum4linux-ng.git
+rohansec@htb[/htb]$ cd enum4linux-ng
+rohansec@htb[/htb]$ pip3 install -r requirements.txt</code></pre><p id="d1189d0b-fb04-49e6-887f-3c4b94f17f9c" class="">Enum4Linux-ng - Enumeration</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ee5c25be-94f6-46b0-9466-c89a740702cb" class="code code-wrap"><code class="language-Plain Text">rohansec@htb[/htb]$ ./enum4linux-ng.py 10.129.14.128 -AENUM4LINUX - next generation
+
+ ==========================
+|    Target Information    |
+ ==========================
+[*] Target ........... 10.129.14.128
+[*] Username ......... &#x27;&#x27;
+[*] Random Username .. &#x27;juzgtcsu&#x27;
+[*] Password ......... &#x27;&#x27;
+[*] Timeout .......... 5 second(s)
+
+ =====================================
+|    Service Scan on 10.129.14.128    |
+ =====================================
+[*] Checking LDAP
+[-] Could not connect to LDAP on 389/tcp: connection refused
+[*] Checking LDAPS
+[-] Could not connect to LDAPS on 636/tcp: connection refused
+[*] Checking SMB
+[+] SMB is accessible on 445/tcp
+[*] Checking SMB over NetBIOS
+[+] SMB over NetBIOS is accessible on 139/tcp
+
+ =====================================================
+|    NetBIOS Names and Workgroup for 10.129.14.128    |
+ =====================================================
+[+] Got domain/workgroup name: DEVOPS
+[+] Full NetBIOS names information:
+- DEVSMB          &lt;00&gt; -         H &lt;ACTIVE&gt;  Workstation Service
+- DEVSMB          &lt;03&gt; -         H &lt;ACTIVE&gt;  Messenger Service
+- DEVSMB          &lt;20&gt; -         H &lt;ACTIVE&gt;  File Server Service
+- ..__MSBROWSE__. &lt;01&gt; - &lt;GROUP&gt; H &lt;ACTIVE&gt;  Master Browser
+- DEVOPS          &lt;00&gt; - &lt;GROUP&gt; H &lt;ACTIVE&gt;  Domain/Workgroup Name
+- DEVOPS          &lt;1d&gt; -         H &lt;ACTIVE&gt;  Master Browser
+- DEVOPS          &lt;1e&gt; - &lt;GROUP&gt; H &lt;ACTIVE&gt;  Browser Service Elections
+- MAC Address = 00-00-00-00-00-00
+
+ ==========================================
+|    SMB Dialect Check on 10.129.14.128    |
+ ==========================================
+[*] Trying on 445/tcp
+[+] Supported dialects and settings:
+SMB 1.0: false
+SMB 2.02: true
+SMB 2.1: true
+SMB 3.0: true
+SMB1 only: false
+Preferred dialect: SMB 3.0
+SMB signing required: false
+
+ ==========================================
+|    RPC Session Check on 10.129.14.128    |
+ ==========================================
+[*] Check for null session
+[+] Server allows session using username &#x27;&#x27;, password &#x27;&#x27;
+[*] Check for random user session
+[+] Server allows session using username &#x27;juzgtcsu&#x27;, password &#x27;&#x27;
+[H] Rerunning enumeration with user &#x27;juzgtcsu&#x27; might give more results
+
+ ====================================================
+|    Domain Information via RPC for 10.129.14.128    |
+ ====================================================
+[+] Domain: DEVOPS
+[+] SID: NULL SID
+[+] Host is part of a workgroup (not a domain)
+
+ ============================================================
+|    Domain Information via SMB session for 10.129.14.128    |
+ ============================================================
+[*] Enumerating via unauthenticated SMB session on 445/tcp
+[+] Found domain information via SMB
+NetBIOS computer name: DEVSMB
+NetBIOS domain name: &#x27;&#x27;
+DNS domain: &#x27;&#x27;
+FQDN: htb
+
+ ================================================
+|    OS Information via RPC for 10.129.14.128    |
+ ================================================
+[*] Enumerating via unauthenticated SMB session on 445/tcp
+[+] Found OS information via SMB
+[*] Enumerating via &#x27;srvinfo&#x27;
+[+] Found OS information via &#x27;srvinfo&#x27;
+[+] After merging OS information we have the following result:
+OS: Windows 7, Windows Server 2008 R2
+OS version: &#x27;6.1&#x27;
+OS release: &#x27;&#x27;
+OS build: &#x27;0&#x27;
+Native OS: not supported
+Native LAN manager: not supported
+Platform id: &#x27;500&#x27;
+Server type: &#x27;0x809a03&#x27;
+Server type string: Wk Sv PrQ Unx NT SNT DEVSM
+
+ ======================================
+|    Users via RPC on 10.129.14.128    |
+ ======================================
+[*] Enumerating users via &#x27;querydispinfo&#x27;
+[+] Found 2 users via &#x27;querydispinfo&#x27;
+[*] Enumerating users via &#x27;enumdomusers&#x27;
+[+] Found 2 users via &#x27;enumdomusers&#x27;
+[+] After merging user results we have 2 users total:
+&#x27;1000&#x27;:
+  username: mrb3n
+  name: &#x27;&#x27;
+  acb: &#x27;0x00000010&#x27;
+  description: &#x27;&#x27;
+&#x27;1001&#x27;:
+  username: cry0l1t3
+  name: cry0l1t3
+  acb: &#x27;0x00000014&#x27;
+  description: &#x27;&#x27;
+
+ =======================================
+|    Groups via RPC on 10.129.14.128    |
+ =======================================
+[*] Enumerating local groups
+[+] Found 0 group(s) via &#x27;enumalsgroups domain&#x27;
+[*] Enumerating builtin groups
+[+] Found 0 group(s) via &#x27;enumalsgroups builtin&#x27;
+[*] Enumerating domain groups
+[+] Found 0 group(s) via &#x27;enumdomgroups&#x27;
+
+ =======================================
+|    Shares via RPC on 10.129.14.128    |
+ =======================================
+[*] Enumerating shares
+[+] Found 5 share(s):
+IPC$:  comment: IPC Service (DEVSM)
+  type: IPC
+dev:
+  comment: DEVenv
+  type: Disk
+home:
+  comment: INFREIGHT Samba
+  type: Disk
+notes:
+  comment: CheckIT
+  type: Disk
+print$:  comment: Printer Drivers
+  type: Disk
+[*] Testing share IPC$
+[-] Could not check share: STATUS_OBJECT_NAME_NOT_FOUND
+[*] Testing share dev
+[-] Share doesn&#x27;t exist
+[*] Testing share home
+[+] Mapping: OK, Listing: OK
+[*] Testing share notes
+[+] Mapping: OK, Listing: OK
+[*] Testing share print$
+[+] Mapping: DENIED, Listing: N/A
+
+ ==========================================
+|    Policies via RPC for 10.129.14.128    |
+ ==========================================
+[*] Trying port 445/tcp
+[+] Found policy:
+domain_password_information:
+  pw_history_length: None
+  min_pw_length: 5
+  min_pw_age: none
+  max_pw_age: 49710 days 6 hours 21 minutes
+  pw_properties:
+  - DOMAIN_PASSWORD_COMPLEX: false
+  - DOMAIN_PASSWORD_NO_ANON_CHANGE: false
+  - DOMAIN_PASSWORD_NO_CLEAR_CHANGE: false
+  - DOMAIN_PASSWORD_LOCKOUT_ADMINS: false
+  - DOMAIN_PASSWORD_PASSWORD_STORE_CLEARTEXT: false
+  - DOMAIN_PASSWORD_REFUSE_PASSWORD_CHANGE: false
+domain_lockout_information:
+  lockout_observation_window: 30 minutes
+  lockout_duration: 30 minutes
+  lockout_threshold: None
+domain_logoff_information:
+  force_logoff_time: 49710 days 6 hours 21 minutes
+
+ ==========================================
+|    Printers via RPC for 10.129.14.128    |
+ ==========================================
+[+] No printers returned (this is not an error)
+
+Completed after 0.61 seconds
+</code></pre><p id="5e36e1dd-9cc8-4609-b613-a9e3154cf48a" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
